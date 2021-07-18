@@ -140,8 +140,5 @@ class musicCog(commands.Cog):
             self.is_playing = False
 
 
-    #create a volume setting functions to set the bot volume
-
-
 def setup(client):
     client.add_cog(musicCog(client))
