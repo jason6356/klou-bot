@@ -139,9 +139,6 @@ class musicCog(commands.Cog):
             self.music_queue.clear()
             self.is_playing = False
 
-    #add volume settings for the bot
-    #@commands.command(name="volume", help="Adjust the volume of the bot")
-
 
 def setup(client):
     client.add_cog(musicCog(client))
