@@ -13,8 +13,8 @@ class musicCog(commands.Cog):
         self.music_queue = []
         self.YDL_OPTIONS = {'format': 'bestaudio', 'noplaylist':'True'}
         self.FFMPEG_OPTIONS = {'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5', 'options': '-vn'}
-
         self.vc = ""
+        self.loop = 0
 
      #searching the item on youtube
     def search_yt(self, item):
@@ -68,7 +68,10 @@ class musicCog(commands.Cog):
             
             print(self.music_queue)
             #remove the first element as you are currently playing it
-            self.music_queue.pop(0)
+            if(self.loop == 0):
+                self.music_queue.pop(0)
+
+
 
             self.vc.play(discord.FFmpegPCMAudio(m_url, **self.FFMPEG_OPTIONS), after=lambda e: self.play_next())
         else:
@@ -138,6 +141,17 @@ class musicCog(commands.Cog):
             self.vc = ""
             self.music_queue.clear()
             self.is_playing = False
+
+
+
+    @commands.command(name="loop", help="Loop the bot")
+    async def loop(self, ctx):
+        if self.loop == 0:
+            self.loop = 1
+            await ctx.send("Looping mode is on")
+        else: 
+            self.loop = 0
+            await ctx.send("Looping mode is off")
 
 
 def setup(client):
