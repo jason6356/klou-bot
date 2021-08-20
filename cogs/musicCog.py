@@ -1,5 +1,6 @@
 import discord
 from discord.ext import commands
+from discord.player import FFmpegAudio, FFmpegPCMAudio
 from youtube_dl import YoutubeDL
 
 class musicCog(commands.Cog):
@@ -141,6 +142,23 @@ class musicCog(commands.Cog):
             self.vc = ""
             self.music_queue.clear()
             self.is_playing = False
+
+
+    @commands.command(name = "rs", help="play random voice in a mp3 file ")
+    async def rs(self, ctx):
+        voice_channel = ctx.author.voice.channel
+        
+        if voice_channel is None:
+            #you need to be connected so that the bot knows where to go
+            await ctx.send("Connect to a voice channel!")
+        else:
+            #connect to the voice channel
+            channel = ctx.message.author.voice.channel
+            voice = await channel.connect()
+            source = FFmpegPCMAudio('wenhan.mp3')
+            player = voice.play(source)
+
+
 
 
 
