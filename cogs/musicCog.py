@@ -155,7 +155,7 @@ class musicCog(commands.Cog):
             #connect to the voice channel
             channel = ctx.message.author.voice.channel
             voice = await channel.connect()
-            source = FFmpegPCMAudio('cogs\\cogs_wenhan.wav\\')
+            source = FFmpegPCMAudio('cogs\\cogs_wenhan.wav')
             player = voice.play(source)
 
     @commands.command(name="loop", help="Loop the bot")
